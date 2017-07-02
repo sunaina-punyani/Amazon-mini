@@ -17,6 +17,8 @@
 
    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
+<!-- Change the "src" attribute according to your installation path -->
+<script src="vendor/jquery/dist/jquery.min.js"></script>
 
 
    <link rel="stylesheet" type="text/css" href="../css/style.css">
@@ -39,7 +41,7 @@
       <div class="container">
         <div class="z-depth-1 #F5F2ED lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-          <form class="col s12" method="post">
+          <form class="col s12" method="post"  name="registration">
 
             <div class='row'>
               <div  class='input-field col s12'>
@@ -76,16 +78,19 @@
 
             <div class='row'>
               <div class='input-field col s12'>
-                <input class='validate' type='password' name='password' id='passwordre' />
+                <input class='validate' type='password' name='password2' id='passwordre' />
                 <label for='password'>Confirm password</label>
               </div>
+              <label style='float: right;' id="recheck">
+                        <label class='pink-text'></label>
+                        </label>
               
             </div>
 
             <br />
             <center>
               <div class='row'>
-                <button type='submit' id="submit" name='btn_login' class='col s12 btn btn-large waves-effect'>Submit</button>
+                <button type='submit' id="submit" name='btn_login' class='col s12 btn btn-large waves-effect' onclick="validateForm();">Submit</button>
               </div>
             </center>
           </form>
@@ -96,55 +101,9 @@
     </main>
 
 <!-- footer -->
-  <footer style="background-color:#EEEBE6"  class="page-footer">
-
-          <div class="container" style="">
-            <div class="row">
-              <div class="col l4 s4">
-              <center>
-                <h5 >Connect With Us</h5>
-                <ul>
-                  <li><a href="#">Facebook</a></li>
-                  <li><a href="#">Instagram</a></li>
-                  <li><a href="#">Twitter</a></li>
-                </ul>
-                </center>
-              </div>
-
-              <div class="col l4  s4">
-              <center>
-                <h5 class="">Links</h5>
-                <ul>
-             
-                  <li><a class=" text-lighten-3" href="#!">About Us</a></li>
-                  <li><a class=" text-lighten-3" href="#!">Contact Us</a></li>
-                </ul>
-                </center>
-              </div>
-
-              <div class="col l4  s4">
-              <center>
-              <h5 class="">Sell Something</h5>
-              <ul>
-                <li><a href="#">Sell On Amazon</a></li>
-              </ul>
-              </center>
-              </div>
-
-
-
-            </div>
-          </div>
-
-          <div style="background-color: #FF9900" class="footer-copyright">
-            <div class="container" id="">
-            © 2014 Copyright Text
-           
-            </div>
-             <a class="grey-text text-lighten-4" id="links" style="float: right" href="index.php">Go to Home Page</a>
-          </div>
-
-        </footer>
+  <?php
+   include 'footer.php';
+  ?>
 
 </body>
 </html>
