@@ -3,7 +3,9 @@ $(function() {
     Materialize.updateTextFields();
 });
 $(".dropdown-button").dropdown({hover:false});
+{
 
-function goToURL(){
-	window.open('https://www.sitepoint.com/community/t/button-click-to-open-file/2007');
-}
+
+$(".star").click(function(){
+ $(this).css({"color": "black"});
+});

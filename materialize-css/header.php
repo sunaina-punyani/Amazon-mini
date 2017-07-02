@@ -59,6 +59,7 @@
                        <li><a href="badges.html" >Cateogary</a></li>
                 <li><a href="collapsible.html" > <i class="material-icons">shopping_cart</i>
 </a></li>
+     <li>Added to Cart: 0</li>
             </ul>
             </div>
      
