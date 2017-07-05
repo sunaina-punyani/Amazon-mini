@@ -41,25 +41,25 @@
       <div class="container">
         <div class="z-depth-1 #F5F2ED lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-          <form class="col s12" method="post"  name="registration">
+          <form class="col s12" method="post" action="<?PHP $_SERVER['PHP_SELF'] ?>" name="registration">
 
             <div class='row'>
               <div  class='input-field col s12'>
-              <input class="validate" type='email' name='name' id='name' />
+              <input class="validate" type='text' name='name' id='name' value="<?php echo isset($_POST['name']) ? $_POST['name'] : '' ?>" />
                 <label for='name'>Enter your Name</label>
               </div>
             </div>
 
              <div class='row'>
               <div  class='input-field col s12'>
-              <input class="validate" type='email' name='mobile' id='mobile' />
+              <input class="validate" type='number' name='mobile' id='mobile' value="<?php echo isset($_POST['mobile']) ? $_POST['mobile'] : '' ?>" />
                 <label for='mobile'>Enter your Mobile Number</label>
               </div>
             </div>
 
             <div class='row'>
               <div class='input-field col s12'>
-                <input class='validate' type='email' name='email' id='email' />
+                <input class='validate' type='email' name='email' id='email' value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>" />
                 <label for='email'>Enter your email</label>
               </div>
               <input type="checkbox" >
@@ -99,6 +99,13 @@
       <a id="acc" style="color: #FF9900" href="template.php">Already have an account?</a>
     </center>
     </main>
+
+
+
+
+    <?php
+     include 'signup_.php';
+    ?>
 
 <!-- footer -->
   <?php
