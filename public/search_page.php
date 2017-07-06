@@ -1,5 +1,5 @@
 <?php
- include 'header.php';
+ include '../includes/header.php';
 ?>
 <body>
 
@@ -262,5 +262,5 @@ You can now also buy and <a href="#">sell</a> used books. Explore the <a href="#
 
 </body>
 <?php
-include 'footer.php';
+include '../includes/footer.php';
 ?>

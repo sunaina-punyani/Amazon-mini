@@ -1,10 +1,10 @@
 <?php
-   include 'header.php';
+   include 'includes/header.php';
 ?>
 
 
 <div class="jumbotron">
-<img id="jumbo" src="../images/jumbotron2.jpg">
+<img id="jumbo" src="images/jumbotron2.jpg">
 </div>
 <br>
 <div class="row">
@@ -28,13 +28,13 @@
 
 	  <div class="col l6 s6">
 	  <a href="#">
-	  <img src="../images/Home.png" style="width: 70%;"><br>
+	  <img src="images/Home.png" style="width: 70%;"><br>
 	  <p>Home</a></p>
 	  </div>
 
 	  <div class="col l6 s6">
 	  <a href="#">
-	  <img src="../images/Fashion.png" style="width: 70%;"><br>
+	  <img src="images/Fashion.png" style="width: 70%;"><br>
 	  <p>Fashion</a></p>
 	  </div>
 
@@ -42,13 +42,13 @@
 
 	  <div class="col l6 s6">
 	  <a href="#">
-	  <img src="../images/Electronics.png" style="width: 70%;"><br>
+	  <img src="images/Electronics.png" style="width: 70%;"><br>
 	  <p>Electronics</a></p>
 	  </div>
 
 	  <div class="col l6 s6">
 	  <a href="#">
-	  <img src="../images/Personal.png" style="width: 70%;"><br>
+	  <img src="images/Personal.png" style="width: 70%;"><br>
 	  <p>Personal Care</a></p>
 	  </div>
 
@@ -64,12 +64,12 @@
   <div class="row">
     <div class="col l6 s6">
       <a href="#">
-	  <img src="../images/fresh_1.jpg" style="width: 70%;"><br>
+	  <img src="images/fresh_1.jpg" style="width: 70%;"><br>
 	  <p>The Alchemist</a></p>
 	  </div>
 	  <div class="col l6 s6">
    <a href="#">
-	  <img src="../images/fresh_2.jpg" style="width: 70%;"><br>
+	  <img src="images/fresh_2.jpg" style="width: 70%;"><br>
 	  <p>Indian Polity</a></p>
 	  </div>
     </div>
@@ -77,12 +77,12 @@
     <div class="row">
     <div class="col l6 s6">
       <a href="#">
-	  <img src="../images/fresh_3.jpg" style="width: 70%;"><br>
+	  <img src="images/fresh_3.jpg" style="width: 70%;"><br>
 	  <p>The Fault in our stars</a></p>
 	  </div>
 	  <div class="col l6 s6">
    <a href="#">
-	  <img src="../images/fresh_4.jpg" style="width: 70%;"><br>
+	  <img src="images/fresh_4.jpg" style="width: 70%;"><br>
 	  <p>13 Reasons Why</a></p>
 	  </div>
     </div>
@@ -95,7 +95,7 @@
 <br>
 
  <?php
-   include 'footer.php';
+   include 'includes/footer.php';
  ?>
 
 </body>

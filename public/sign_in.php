@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Materialize Demo</title>
+  <title>Sign in</title>
 
   <!-- Compiled and minified CSS -->
 
@@ -15,7 +15,7 @@
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
 
-   <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+   <!--<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>-->
 
 
 
@@ -39,7 +39,14 @@
       <div class="container">
         <div class="z-depth-1 #F5F2ED lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-          <form class="col s12" method="post">
+          <form class="col s12" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+          <?php if(!empty($err_msg)){ ?>
+          <div class="alert alert-danger">
+          <a href="#" class="alert-link">
+          <? php echo $err_msg; ?>
+          </a>
+          </div>
+          <?php } ?>
             <div class='row'>
               <div class='col s12'>
               </div>
@@ -47,7 +54,7 @@
 
             <div class='row'>
               <div class='input-field col s12'>
-                <input class='validate' type='email' name='email' id='email' />
+                <input class='validate' type='email' name='email' id='email' value="<?php if(isset($user_email)){echo $user_email;} ?>"/>
                 <label for='email'>Enter your email</label>
               </div>
             </div>
@@ -77,7 +84,7 @@
 
 <!-- footer -->
  <?php
-  include 'footer.php';
+  include '/../includes/footer.php';
  ?>
 
 </body>

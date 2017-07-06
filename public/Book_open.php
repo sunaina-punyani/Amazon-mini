@@ -1,5 +1,5 @@
 <?php
-  include 'header.php';
+  include '../includes/header.php';
 ?>
 <body>
 	<br><br>
@@ -114,5 +114,5 @@ Forbes Magazine has listed Amish amongst the 100 most influential celebrities in
 </body>
 
 <?php
- include 'footer.php';
+ include '../includes/footer.php';
 ?>
