@@ -39,7 +39,7 @@
       <div class="container">
         <div class="z-depth-1 #F5F2ED lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-          <form class="col s12" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+          <form class="col s12" action="<?php $_SERVER['PHP_SELF'];?>" method="POST">
        
             <div class='row'>
               <div class='col s12'>
@@ -75,6 +75,10 @@
       <a id="acc" style="color: #FF9900" href="sign-up.php">Create a new account</a>
     </center>
     </main>
+
+    <?php 
+  include 'login.php';
+    ?>
 
 <!-- footer -->
  <?php
