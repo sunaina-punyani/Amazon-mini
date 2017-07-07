@@ -40,13 +40,7 @@
         <div class="z-depth-1 #F5F2ED lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
           <form class="col s12" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
-          <?php if(!empty($err_msg)){ ?>
-          <div class="alert alert-danger">
-          <a href="#" class="alert-link">
-          <? php echo $err_msg; ?>
-          </a>
-          </div>
-          <?php } ?>
+       
             <div class='row'>
               <div class='col s12'>
               </div>
@@ -84,7 +78,7 @@
 
 <!-- footer -->
  <?php
-  include '/../includes/footer.php';
+  include '../includes/footer.php';
  ?>
 
 </body>

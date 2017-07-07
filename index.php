@@ -13,7 +13,7 @@
   <center>
   	<h5>Welcome</h5>
   	<p>Sign in for a better experience</p>
-  	<a href="sign-up.php" class="waves-effect waves-light btn" style="background-color: #FF9900"><p class="black-text" style="margin-top: -3px;">Sign Up</p></a>
+  	<a href="public/sign_in.php" class="waves-effect waves-light btn" style="background-color: #FF9900"><p class="black-text" style="margin-top: -3px;">Sign Up</p></a>
   	<br><br>
   </center>
 

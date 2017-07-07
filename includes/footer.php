@@ -43,7 +43,7 @@
             © 2014 Copyright Text
            
             </div>
-             <a class="grey-text text-lighten-4" id="links" style="float: right" href="home.php">Go to Home Page</a>
+             <a class="grey-text text-lighten-4" id="links" style="float: right" href="../index.php">Go to Home Page</a>
           </div>
 
         </footer>
