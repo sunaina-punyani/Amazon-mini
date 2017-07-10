@@ -48,9 +48,12 @@ else{
               $result = mysqli_query($dbc, $query);
               $row = mysqli_fetch_array($result);
               $user_id = $row['user_id'];
+              $first = $row['name'];
 
               require_once(__DIR__ . '/../controls/mailer.php');
-              $activation_link = dirname((isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])."/activate.php?id=".$user_id."&key=".md5(sha1($first));
+              $activation_link = dirname((isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])."/activate.php?id=".$user_id."&key=".md5(sha1(mt_rand(10000,99999).time().$first));
+                    //sha1 is secure hash algorithm-1
+              
               $to = $email;
               $from = USER;
               $from_name = NAME;
