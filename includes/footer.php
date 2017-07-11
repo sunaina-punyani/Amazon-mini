@@ -1,3 +1,4 @@
+<div class="footer">
 <footer style="background-color:#EEEBE6"  class="page-footer">
 
           <div class="container" style="">
@@ -47,3 +48,6 @@
           </div>
 
         </footer>
+        </div>
+        </body>
+        </html>

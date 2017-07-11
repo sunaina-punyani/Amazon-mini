@@ -1,7 +1,8 @@
 <?php
 
-  //include '../includes/authenticate.php';
+  include '../includes/authenticate.php';
   include '../includes/dbconfig.php';
+$err_msg=" ";
 
 if(!isset($_SESSION['user_id'])){
 
@@ -13,7 +14,6 @@ if(!isset($_SESSION['user_id'])){
     $mobile = mysqli_real_escape_string($dbc, trim($_POST['mobile']));
     $email = mysqli_real_escape_string($dbc, trim($_POST['email']));
     $password1 = mysqli_real_escape_string($dbc, trim($_POST['password1']));
-    $pass = password_hash($password1, PASSWORD_BCRYPT);
     $password2 = mysqli_real_escape_string($dbc, trim($_POST['password2']));
     $cart = 0;
     $grand = 0;
@@ -31,29 +31,29 @@ if(!isset($_SESSION['user_id'])){
 if (mysqli_num_rows($result) == 0 && mysqli_num_rows($result2) == 0) {
 
 if ($password1 != $password2) {// passwords don't match
-            echo 'The passwords don\'t match.';
+            $err_msg='The passwords don\'t match.';
           }
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {// email is invalid
-           echo 'The email provided is invalid.';
+else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {// email is invalid
+           $err_msg='The email provided is invalid.';
           }
-
-
 else{
-  $sql = "Insert into user(name, mobile_num, email_id, password,verified,cart_items,grand_total)"."values('$first','$mobile','$email','$pass','$verified','$cart','$grand')";
+
+            $first = ucfirst(strtolower($first));
+            $hash = password_hash($password1, PASSWORD_BCRYPT);
+
+  $sql = "Insert into user(name, mobile_num, email_id, password,verified,cart_items,grand_total)"."values('$first','$mobile','$email','$hash','$verified','$cart','$grand')";
            $res = mysqli_query($dbc,$sql);  
             if($res){
-              echo "Account created";
+              //echo "Account created";
 
               $query = "SELECT user_id FROM user WHERE email_id = '$email'";
               $result = mysqli_query($dbc, $query);
               $row = mysqli_fetch_array($result);
               $user_id = $row['user_id'];
-              $first = $row['name'];
+            
 
               require_once(__DIR__ . '/../controls/mailer.php');
-              $activation_link = dirname((isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])."/activate.php?id=".$user_id."&key=".md5(sha1(mt_rand(10000,99999).time().$first));
-                    //sha1 is secure hash algorithm-1
-              
+              $activation_link = dirname((isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'])."/activate.php?id=".$user_id."&key=".md5(sha1($first));
               $to = $email;
               $from = USER;
               $from_name = NAME;
@@ -61,25 +61,32 @@ else{
               $subject = 'Amazon-Mini Account Activation';
               $body = "Hello $first!<br>To activate your Amazon-Mini account click on the following link.<br><br><a href='$activation_link'>Activate</a><br><br>You can login to your account after activation.";
               singlemail($to, $from, $from_name, $subject, $body);
+              header ('Location: confirmsignup.php');
              
-              echo "mail sent";
+              //echo "mail sent";
 
             }
             else
-              echo "Error occured";
+              $err_msg= "Error occured while sending confirmation mail.";
     }
 
    }
-   else{
-    echo "Already registered";
+   else if(mysqli_num_rows($result)!=0 && mysqli_num_rows($result2)!=0){
+    $err_msg="Already registered.";
+  }
+   else if(mysqli_num_rows($result)!=0 && mysqli_num_rows($result2)==0){
+    $err_msg="Email id already in use.";
+    } 
+   else if(mysqli_num_rows($result)==0 && mysqli_num_rows($result2)!=0){
+     $err_msg="Contact number already in use.";
+    }       
+
    }         
-
-
   }
 
 //if (!empty($name) && !empty($mob_num) && !empty($email) && !empty($password1) && !empty($password2)) {
         // make sure someone isn't registered with same email
-     /*   $query = "SELECT user_id FROM user WHERE email_id = '$email'";
+     /*   $query = "SELECT user_id FROM user WHERE email_id = '$email";
         $result = mysqli_query($dbc, $query);
 
         if (mysqli_num_rows($result) == 0) {
@@ -103,8 +110,8 @@ else{
         //}
        
  // }
-}
-
+//}
+//
 function validate_contact($contact) {
     if (preg_match('/^[789]\d{9}$/', $contact))
       return true;
@@ -162,7 +169,11 @@ function validate_name($name) {
         <div class="z-depth-1 #F5F2ED lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
           <form class="col s12" method="POST" action="<?PHP $_SERVER['PHP_SELF'] ?>" name="registration">
-        
+            <div class="row" style="color: red;">
+              <p>&nbsp;
+              <?php echo $err_msg; ?>&nbsp;</p>
+              </div>
+
             <div class='row'>
               <div  class='input-field col s12'>
               <input class="validate" type='text' name='name' id='name' value=" <?php if(isset($name)) echo $name; ?>" />
@@ -182,10 +193,7 @@ function validate_name($name) {
                 <input class='validate' type='email' name='email' id='email' value="<?php if(isset($email)) echo $email; ?>" />
                 <label for='email'>Enter your email</label>
               </div>
-             <!-- <input type="checkbox" >
-              <label style='float: right;'>
-                      <!--  <label class='pink-text'><b>Send me a mail</b></label>
-                     </label> -->
+
             </div>
 
             <div class='row'>
@@ -228,5 +236,3 @@ function validate_name($name) {
    include '../includes/footer.php';
   ?>
 
-</body>
-</html>
