@@ -111,7 +111,7 @@ Forbes Magazine has listed Amish amongst the 100 most influential celebrities in
 </div>
 	
 
-</body>
+
 
 <?php
  include '../includes/footer.php';

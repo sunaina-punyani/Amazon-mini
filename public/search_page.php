@@ -260,7 +260,7 @@ You can now also buy and <a href="#">sell</a> used books. Explore the <a href="#
 
 </div>	
 
-</body>
+
 <?php
 include '../includes/footer.php';
 ?>

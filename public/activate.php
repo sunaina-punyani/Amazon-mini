@@ -1,80 +1,49 @@
-
 <?php
-include '../includes/authenticate.php';
-include '../includes/dbconfig.php';
 
-if (!empty($_GET['id'])) {
-		$id = mysqli_real_escape_string($dbc, trim($_GET['id']));
-	}
-	if (!empty($_GET['key'])) {
-		$key = mysqli_real_escape_string($dbc, trim($_GET['key']));
-	}
+  // authenticate
+  require_once(__DIR__ . '/../includes/authenticate.php');
 
-if (isset($id) && isset($key)) {
+  // connect to database
+  require_once(__DIR__ . '/../includes/dbconfig.php');
 
-	$query = "Update user set verified= 1 where user_id='$id'";
+  $display_msg = "<div class='container-fluid'><h1>Invalid Activation!</h1><p>Sorry, it seems you have an invalid activation link. Check the link sent to you or try again.<br>If the problem persists, mail us at regdesk.vjti@gmail.com.</p></div>";
+
+  if (!empty($_GET['id'])) {
+    $id = mysqli_real_escape_string($dbc, trim($_GET['id']));
+  }
+  if (!empty($_GET['key'])) {
+    $key = mysqli_real_escape_string($dbc, trim($_GET['key']));
+  }
+  if (isset($id) && isset($key)) {
+
+    // get the first and last name of user
+    $query = "SELECT name from user WHERE user_id = '$id'";
     $result = mysqli_query($dbc, $query);
-
-    $sql = "select * from user where user_id = '$id'";
-    $res = mysqli_query($dbc, $sql);
-
-    if($res){
-        $row = mysqli_fetch_array($res);
-        $_SESSION['user_id'] = $row['user_id'];
+    if (mysqli_num_rows($result) == 1) {
+      $row = mysqli_fetch_array($result);
+      $db_key = md5(sha1($row['name']));
+      if ($key == $db_key) {
+        // account verified
+        $_SESSION['user_id'] = $id;
         $_SESSION['name'] = $row['name'];
-      
-        header('Location: http://localhost:8888/Amazon-mini/public/sign-up.php');
-
-
-     }
-    else{
-    	echo "Something wrong";
+        $query = "UPDATE user SET verified = 1 WHERE user_id = $id LIMIT 1";
+        mysqli_query($dbc, $query);
+        $display_msg = '<div class="container-fluid"><h1>Congatulations!</h1><p><b>Your account is activated.</b><br>Go explore! <a href="index.php">Amazon-mini</a></p></div>';
+      }
     }
+  }
 
+  // render header
+  $title = 'Activate';
+  require_once(__DIR__ . '/../includes/header.php');
 
-}
+  echo $display_msg;
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  
+  
 
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-
-   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> 
-
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script> 
-
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
-
-   <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
-<!-- Change the "src" attribute according to your installation path -->
-<script src="vendor/jquery/dist/jquery.min.js"></script>
-
-
-   <link rel="stylesheet" type="text/css" href="style.css">
-
-
-
-   <script type="text/javascript" src="../js/scripts.js"></script>
-</head>
-<body>
-<div class="logo">
- <center>
- 	<img src="../images/amazon.jpg" style="width: 250px">
- </center>
-</div>
-<br><br>
-<center>
-	<form method="post" action="<?PHP $_SERVER['SELF_PHP'] ?>">
-		<a class="waves-effect waves-light btn" style="background-color:#FF9900">Proceed</a>
-
-	</form>
-	</center>
-	<br><br>
-</body>
-<?php
-include '../includes/footer.php';
+<?php 
+  require_once(__DIR__ . '/../includes/footer.php');
+  
 ?>
