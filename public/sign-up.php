@@ -182,10 +182,10 @@ function validate_name($name) {
                 <input class='validate' type='email' name='email' id='email' value="<?php if(isset($email)) echo $email; ?>" />
                 <label for='email'>Enter your email</label>
               </div>
-              <input type="checkbox" >
+             <!-- <input type="checkbox" >
               <label style='float: right;'>
-                        <label class='pink-text'><b>Send me a mail</b></label>
-                     </label>
+                      <!--  <label class='pink-text'><b>Send me a mail</b></label>
+                     </label> -->
             </div>
 
             <div class='row'>

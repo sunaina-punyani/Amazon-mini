@@ -23,7 +23,7 @@ if (isset($id) && isset($key)) {
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['name'] = $row['name'];
       
-        header('Location: http://localhost:8888/Amazon-mini/public/sign-up.php');
+        header('Location: sign_in.php');
 
 
      }
