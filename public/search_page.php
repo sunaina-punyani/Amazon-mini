@@ -1,5 +1,6 @@
 <?php
  include '../includes/header.php';
+ include '../includes/dbconfig.php';
 ?>
 <body>
 
@@ -25,12 +26,27 @@
  <br>
 <hr>
  <p>Books</p>
- <ul>
+<!-- <ul>
  	<li><a href="#">Thrillers (100)</a></li>
  	<li><a href="#">Sci-fi (1,928)</a></li>
  	<li><a href="#">Accounts (67)</a></li>
 
+ </ul>-->
+ <ul>
+  <?php
+  
+  $sql = 'SELECT count(book_id) as c, sub_name, sub_id from books natural join sub_category GROUP by sub_id';
+  
+   if($result = mysqli_query($dbc,$sql)){
+    while($row = mysqli_fetch_array($result)){
+      echo "<li><a href='#'>".$row['sub_name']."(".$row['c'].")"."</a></li>";
+    
+    }
+   }
+
+ ?>
  </ul>
+
 <hr>
   <br>
 
@@ -49,20 +65,40 @@
 
     <p style="font-size: 0.8em"><b> English and Indian Languages </b><br>
     <ul>
-     <li> 
+
+    <!-- <li> 
      <input type="checkbox" id="test7" />
       <label for="test7">English</label><br>
       </li>
       <li>
       <input type="checkbox" id="test8" />
       <label for="test8">Hindi</label>
+      </li>-->
+
+      <?php
+      $sql = "SELECT count(book_id) as c,lang_id, language from Language NATURAL join books GROUP BY Language";
+
+      if($result = mysqli_query($dbc,$sql)){
+    while($row = mysqli_fetch_array($result)){
+      echo"
+      <li>
+      <input type='checkbox' id=l".$row['lang_id']." />
+      <label for=l".$row['lang_id'].">".$row['language']."(".$row['c'].")</label><br>
       </li>
+      ";
+    
+    }
+   }
+
+
+      ?>
+
       </ul>
     </p>
 <br>
      <p style="font-size: 0.8em"><b> Author </b><br>
      <ul>
-     <li>
+    <!-- <li>
       <input type="checkbox" id="test9" />
       <label for="test9">Jude Hardin</label><br>
       </li>
@@ -78,31 +114,81 @@
           <input type="checkbox" id="test12" />
       <label for="test12">John Grisham</label> 
       </li>
-    </p>
+    </p>-->
+    <?php
+    
+    $sql= "SELECT COUNT(book_id) as c, author_name,author_id, book_id from author NATURAL JOIN books GROUP by author_name";
+
+    if($result = mysqli_query($dbc,$sql)){
+    while($row = mysqli_fetch_array($result)){
+      echo"
+       <li>
+      <input type='checkbox' id=a".$row['author_id']." />
+      <label for=a".$row['author_id'].">".$row['author_name']."(".$row['c'].")</label><br>
+      </li>
+      ";
+    
+    }
+   }
+
+    ?>
     </ul>
     <br>
 
     <p style="font-size: 0.8em"><b> Price </b>
     <ul>
+    <!--
     	<li><a href="#">Under &#8377 100</a></li>
       	<li><a href="#">&#8377 100 - &#8377 200 </a></li>
     	<li><a href="#">&#8377 200 - &#8377 500</a></li>
     	<li><a href="#">&#8377 500 - &#8377 1000</a></li>
     	<li><a href="#">Over &#8377 1000</a></li>
+    -->
+<?php
+    $sql ="SELECT COUNT(book_id) as c , starting_price, ending_price , price_id from price_range NATURAL JOIN books GROUP BY price_id";
+
+if($result = mysqli_query($dbc,$sql)){
+    while($row = mysqli_fetch_array($result)){
+      echo"
+       <li>
+     <a href='#'> &#8377 ".$row['starting_price']."- &#8377 ".$row['ending_price']." (".$row['c'].")
+      </li>
+      ";
     
+    }
+   }
+
+?>
     </ul>    	
     </p><br>
 
      <p style="font-size: 0.8em"><b> Seller </b>
     <ul>
-    	<li>
+    <!--	<li>
     		<input type="checkbox" id="test13" />
       <label for="test14">Ted Publications</label><br>
     	</li>
       	<li>
       <input type="checkbox" id="test14" />
       <label for="test14">Penguin Publications</label><br>		
-      	</li>
+      	</li>-->
+
+        <?php
+          $sql ="SELECT COUNT(book_id) as c, company_id ,company_name from company NATURAL join books GROUP by company_id";
+
+           if($result = mysqli_query($dbc,$sql)){
+    while($row = mysqli_fetch_array($result)){
+      echo"
+       <li>
+      <input type='checkbox' id=c".$row['company_id']." />
+      <label for=c".$row['company_id'].">".$row['company_name']."(".$row['c'].")</label><br>
+      </li>
+      ";
+    
+    }
+   }
+
+        ?>
     	
     
     </ul>
@@ -116,6 +202,7 @@
 <div class="row">
 
 <center>
+<!--
 <div class="col s12 l2">
 <a href="#">
 <img src="../images/lit.png" style="margin-left: 5%; margin-right: 10%; width: 70%; ">
@@ -146,7 +233,24 @@
 <a href="#">
 <img src="../images/bussiness.png" style="margin-left: 5%; margin-right: 5%; width: 70%; ">
 <p>Business &amp; Economics</a></p>
-</div>
+</div>-->
+
+<?php 
+  $sql = "SELECT sub_id, sub_name from sub_category where sub_id in (SELECT sub_id from books) limit 6";
+  if($result = mysqli_query($dbc,$sql)){
+    while($row = mysqli_fetch_array($result)){
+      echo "
+    <div class='col s12 l2'>
+    <a href='#'>
+    <img src='../images/".$row['sub_id'].".png' style='margin-left: 5%; margin-right: 10%; width: 70%; '>
+    <p>".$row['sub_name']."</a></p>
+    </div>
+  ";
+    }
+  }
+
+
+?>
 </center>
 
 </div>
@@ -184,6 +288,7 @@
  <hr>
  <br>
  <center>
+ <!--
  <div class="col s12 l3">
  	<a href="#">
  	<img src="../images_books/meluha_mrutunjay_book_11.jpg" style="width: 70%;">
@@ -211,7 +316,26 @@
  	<p style="font-size: 0.8em">The Hostage </p>
  	</a>
  		<p>James Patterson</p> <img src="../images/prime.gif">	
+ </div>-->
+
+ <?php
+   $sql = "SELECT * FROM books NATURAL JOIN author ORDER BY RAND() LIMIT 4";
+   if($result = mysqli_query($dbc,$sql)){
+    while($row = mysqli_fetch_array($result)){
+     echo "
+       <div class='col s12 l3'>
+        <a href='book_open.php?id=".$row['book_id']."'>
+      <img src='../images_books/".$row['book_id'].".jpg' style='width: 70%; height: 60%;'>  
+      <p style='font-size: 0.8em'>".$row['book_name']."</p> 
+      </a>
+      <p>".$row['author_name']."</p>
  </div>
+     ";
+     
+    }
+   }
+ ?>
+
  </center>
  </div>
 

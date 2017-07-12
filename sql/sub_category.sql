@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jun 25, 2017 at 12:22 PM
+-- Generation Time: Jul 12, 2017 at 09:53 PM
 -- Server version: 5.6.35
 -- PHP Version: 7.0.15
 
@@ -27,17 +27,26 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `sub_category` (
+  `sub_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `sub_id` int(11) NOT NULL DEFAULT '0',
-  `sub_name` varchar(150) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `sub_name` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sub_category`
 --
 
-INSERT INTO `sub_category` (`category_id`, `sub_id`, `sub_name`) VALUES
-(1, 0, 'Thrillers');
+INSERT INTO `sub_category` (`sub_id`, `category_id`, `sub_name`) VALUES
+(1, 1, 'Thrillers'),
+(2, 1, 'Romance'),
+(3, 1, 'Literature'),
+(4, 1, 'Family and Relationships'),
+(5, 1, 'Business'),
+(6, 1, 'Sci-fi'),
+(7, 1, 'Biographies'),
+(9, 1, 'Study'),
+(10, 1, 'Textbooks'),
+(11, 1, 'Children');
 
 --
 -- Indexes for dumped tables
@@ -48,7 +57,7 @@ INSERT INTO `sub_category` (`category_id`, `sub_id`, `sub_name`) VALUES
 --
 ALTER TABLE `sub_category`
   ADD PRIMARY KEY (`sub_id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `fk6` (`category_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -58,7 +67,7 @@ ALTER TABLE `sub_category`
 -- AUTO_INCREMENT for table `sub_category`
 --
 ALTER TABLE `sub_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- Constraints for dumped tables
 --

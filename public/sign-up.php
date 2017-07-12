@@ -1,7 +1,6 @@
 <?php
-
-  include '../includes/authenticate.php';
   include '../includes/dbconfig.php';
+ include '../includes/authenticate.php';
 $err_msg=" ";
 
 if(!isset($_SESSION['user_id'])){
@@ -18,7 +17,7 @@ if(!isset($_SESSION['user_id'])){
     $cart = 0;
     $grand = 0;
     $verified =0;
-
+ 
 
      $query = "SELECT user_id FROM user WHERE email_id = '$email'";
         $result = mysqli_query($dbc, $query);
@@ -166,7 +165,7 @@ function validate_name($name) {
       <div class="section"></div>
 
       <div class="container">
-        <div class="z-depth-1 #F5F2ED lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+        <div class="z-depth-1 #F5F2ED lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; width: 40%; border: 1px solid #EEE;">
 
           <form class="col s12" method="POST" action="<?PHP $_SERVER['PHP_SELF'] ?>" name="registration">
             <div class="row" style="color: red;">
