@@ -7,7 +7,7 @@
 <div class="row">
 
 <div class="col s12 l2">
-	<ul class="collapsible" data-collapsible="accordion">
+  <ul class="collapsible" data-collapsible="accordion">
     <li>
       <div class="collapsible-header">Featured Stores<i class="material-icons ">arrow_drop_down</i></div>
       <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
@@ -27,9 +27,9 @@
 <hr>
  <p>Books</p>
 <!-- <ul>
- 	<li><a href="#">Thrillers (100)</a></li>
- 	<li><a href="#">Sci-fi (1,928)</a></li>
- 	<li><a href="#">Accounts (67)</a></li>
+  <li><a href="#">Thrillers (100)</a></li>
+  <li><a href="#">Sci-fi (1,928)</a></li>
+  <li><a href="#">Accounts (67)</a></li>
 
  </ul>-->
  <ul>
@@ -138,11 +138,11 @@
     <p style="font-size: 0.8em"><b> Price </b>
     <ul>
     <!--
-    	<li><a href="#">Under &#8377 100</a></li>
-      	<li><a href="#">&#8377 100 - &#8377 200 </a></li>
-    	<li><a href="#">&#8377 200 - &#8377 500</a></li>
-    	<li><a href="#">&#8377 500 - &#8377 1000</a></li>
-    	<li><a href="#">Over &#8377 1000</a></li>
+      <li><a href="#">Under &#8377 100</a></li>
+        <li><a href="#">&#8377 100 - &#8377 200 </a></li>
+      <li><a href="#">&#8377 200 - &#8377 500</a></li>
+      <li><a href="#">&#8377 500 - &#8377 1000</a></li>
+      <li><a href="#">Over &#8377 1000</a></li>
     -->
 <?php
     $sql ="SELECT COUNT(book_id) as c , starting_price, ending_price , price_id from price_range NATURAL JOIN books GROUP BY price_id";
@@ -152,26 +152,26 @@ if($result = mysqli_query($dbc,$sql)){
       echo"
        <li>
      <a href='#'> &#8377 ".$row['starting_price']."- &#8377 ".$row['ending_price']." (".$row['c'].")
-      </li>
+      </a></li>
       ";
     
     }
    }
 
 ?>
-    </ul>    	
+    </ul>     
     </p><br>
 
      <p style="font-size: 0.8em"><b> Seller </b>
     <ul>
-    <!--	<li>
-    		<input type="checkbox" id="test13" />
+    <!--  <li>
+        <input type="checkbox" id="test13" />
       <label for="test14">Ted Publications</label><br>
-    	</li>
-      	<li>
+      </li>
+        <li>
       <input type="checkbox" id="test14" />
-      <label for="test14">Penguin Publications</label><br>		
-      	</li>-->
+      <label for="test14">Penguin Publications</label><br>    
+        </li>-->
 
         <?php
           $sql ="SELECT COUNT(book_id) as c, company_id ,company_name from company NATURAL join books GROUP by company_id";
@@ -189,7 +189,7 @@ if($result = mysqli_query($dbc,$sql)){
    }
 
         ?>
-    	
+      
     
     </ul>
     </p>
@@ -198,90 +198,91 @@ if($result = mysqli_query($dbc,$sql)){
 
 
 <div class="col s12 l10 offset-2" id="books">
-<br>
 
-<!-- books start
-<div class="row">
+   <?php
+    
+  if (!empty($_GET['id'])) {
+    $id = mysqli_real_escape_string($dbc, trim($_GET['id']));
+
+    $sql1= "Select sub_name from sub_category where sub_id = '$id'";
+    $result = mysqli_query($dbc,$sql1);
+    $row = mysqli_fetch_assoc($result);
+
+    echo "<center><h4>".$row['sub_name']."</h4></center>";
 
 
- <div class="col s11 l3">
- <a href="#"><img src="../images/fresh_1.jpg" style="width: 95%;"></a>
+ $sql ="Select * from books natural join author where sub_id= '$id'";
+  if($result = mysqli_query($dbc, $sql)){   
+    while($row = mysqli_fetch_assoc($result)){
+      echo "
+      <div class='row'>
+
+
+ <div class='col s11 l3'>
+ <a href='book_open.php?id=".$row['book_id']."'><img src='../images_books/".$row['book_id'].".jpg' style='width: 95%;'></a>
  </div>
 
- <div class="col s12 l8">
+ <div class='col s12 l8'>
  <br>
- <h5><a href="#">Sita - Warrior of Mithila (Book 2- Ram Chandra Series): An adventure thriller that follows Lady Sita’s journey, set in mythological times</a></h5>
- <p>by <a href="#">Amish Tripathi</a></p>
+ <h5><a href='book_open.php?id=".$row['book_id']."'>".$row['book_name']."</a></h5>
+ <p>by <a href='#'>".$row['author_name']."</a></p>
  <p>Paperback<br>
-  &#8377 166<br>
-  Get it by <span style="color: green">12th July 2017</span>
- </p>
- </div>
-
-</div>
-<hr>
-<br><br>
-<div class="row">
-
-
- <div class="col s11 l3">
- <a href="#"><img src="../images/fresh_2.jpg" style="width: 95%;"></a>
- </div>
-
- <div class="col s12 l8">
- <br>
- <h5><a href="#">Sita - Warrior of Mithila (Book 2- Ram Chandra Series): An adventure thriller that follows Lady Sita’s journey, set in mythological times</a></h5>
- <p>by <a href="#">Amish Tripathi</a></p>
- <p>Paperback<br>
-  &#8377 166<br>
-  Get it by <span style="color: green">12th July 2017</span>
- </p>
- </div>
-
-</div>
-<hr>
-<br><br>
-<div class="row">
-
-
- <div class="col s11 l3">
- <a href="#"><img src="../images/fresh_3.jpg" style="width: 95%;"></a>
- </div>
-
- <div class="col s12 l8">
- <br>
- <h5><a href="#">Sita - Warrior of Mithila (Book 2- Ram Chandra Series): An adventure thriller that follows Lady Sita’s journey, set in mythological times</a></h5>
- <p>by <a href="#">Amish Tripathi</a></p>
- <p>Paperback<br>
-  &#8377 166<br>
-  Get it by <span style="color: green">12th July 2017</span>
+  &#8377 ".$row['price']."<br>
+  Get it by <span style='color: green'>12th July 2017</span>
  </p>
  </div>
 </div>
--->
 <hr>
 <br><br>
+    ";
+   }
+  }
+ }
 
-<div class="row">
-<center>
-  <a class="waves-effect waves-light btn" id="btn_books" style="background-color: #FF9900;">Load More</a>
-</center>
+  if (!empty($_GET['start'])) {
+    $start = mysqli_real_escape_string($dbc, trim($_GET['start']));
+
+    $sql1= "Select starting_price, ending_price from price_range where price_id = '$start'";
+    $result = mysqli_query($dbc,$sql1);
+    $row = mysqli_fetch_assoc($result);
+
+    echo "<center><h4>Books in price range &#8377; ".$row['starting_price']." to &#8377; ".$row['ending_price']."</h4></center>";
+
+    $sql = "select * from books natural join author where price_id = '$start'";
+    $result = mysqli_query($dbc, $sql);
+
+    while($row= mysqli_fetch_assoc($result)){
+        echo "
+      <div class='row'>
+
+
+ <div class='col s11 l3'>
+ <a href='book_open.php?id=".$row['book_id']."'><img src='../images_books/".$row['book_id'].".jpg' style='width: 95%;'></a>
+ </div>
+
+ <div class='col s12 l8'>
+ <br>
+ <h5><a href='book_open.php?id=".$row['book_id']."'>".$row['book_name']."</a></h5>
+ <p>by <a href='#'>".$row['author_name']."</a></p>
+ <p>Paperback<br>
+  &#8377 ".$row['price']."<br>
+  Get it by <span style='color: green'>12th July 2017</span>
+ </p>
+ </div>
 </div>
+<hr>
+<br><br>
+    ";
+   }
+    }
 
+     
+  
+
+   ?>
+  
 </div>
 </p>
 </div>
-</div>
-</body>
-    <script src="../js/books_page_main.js"></script>
-
-
-<?php
- include '../includes/footer.php';
-?>
-
-
-
-
 
 

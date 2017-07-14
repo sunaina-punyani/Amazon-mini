@@ -39,7 +39,7 @@
   
    if($result = mysqli_query($dbc,$sql)){
     while($row = mysqli_fetch_array($result)){
-      echo "<li><a href='#'>".$row['sub_name']."(".$row['c'].")"."</a></li>";
+      echo "<li><a href='books_page.php?id=".$row['sub_id']."'>".$row['sub_name']."(".$row['c'].")"."</a></li>";
     
     }
    }
@@ -151,7 +151,7 @@ if($result = mysqli_query($dbc,$sql)){
     while($row = mysqli_fetch_array($result)){
       echo"
        <li>
-     <a href='#'> &#8377 ".$row['starting_price']."- &#8377 ".$row['ending_price']." (".$row['c'].")
+     <a href='books_page.php?start=".$row['price_id']."'> &#8377 ".$row['starting_price']."- &#8377 ".$row['ending_price']." (".$row['c'].")</a>
       </li>
       ";
     
@@ -241,7 +241,7 @@ if($result = mysqli_query($dbc,$sql)){
     while($row = mysqli_fetch_array($result)){
       echo "
     <div class='col s12 l2'>
-    <a href='#'>
+    <a href='books_page.php?id=".$row['sub_id']."'>
     <img src='../images/".$row['sub_id'].".png' style='margin-left: 5%; margin-right: 10%; width: 70%; '>
     <p>".$row['sub_name']."</a></p>
     </div>
